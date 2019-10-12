@@ -25,13 +25,16 @@ print_result_line() {
 print_header() {
   printf '| '
   for client in "${clients[@]}"; do
-     printf "| $client"
-  done
-  printf "|\n"
-  for client in "${clients[@]}"; do
-     printf "| ---"
+    printf "| $client"
   done
   printf "|"
+}
+
+print_separator() {
+  for client in "${clients[@]}"; do
+    printf "| --- "
+  done
+  printf "| --- |"
 }
 
 render_result() {
@@ -53,6 +56,7 @@ render_table_result() {
 }
 
 results_matrix="$(print_header)\n"
+results_matrix+="$(print_separator)\n"
 
 for connection in "${connections[@]}"; do
   results_matrix+="| $connection "
