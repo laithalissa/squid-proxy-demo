@@ -1,0 +1,73 @@
+version: "3.7"
+services:
+  squid:
+    image: sameersbn/squid:3.5.27-2
+    ports:
+      - "3128:3128"
+    volumes:
+      - ./etc/squid.conf:/etc/squid/squid.conf
+    restart: always
+    networks:
+      - internet
+      - internal-1
+      - internal-2
+      - internal-3
+  http-client:
+    image: praqma/network-multitool
+    command: bash -c "while true; do sleep 30; done"
+    environment:
+      - http_proxy=squid:3128
+      - HTTPS_PROXY=squid:3128
+    volumes:
+      - ./etc/test-proxy.sh:/test-proxy.sh
+    networks:
+      - internal-1
+  tls-client:
+    image: praqma/network-multitool
+    environment:
+      - http_proxy=squid:3128
+      - HTTPS_PROXY=squid:3128
+    command: bash -c "while true; do sleep 30; done"
+    volumes:
+      - ./etc/test-proxy.sh:/test-proxy.sh
+    networks:
+      - internal-2
+  blocked-client:
+    image: praqma/network-multitool
+    environment:
+      - http_proxy=squid:3128
+      - HTTPS_PROXY=squid:3128
+    command: bash -c "while true; do sleep 30; done"
+    volumes:
+      - ./etc/test-proxy.sh:/test-proxy.sh
+    networks:
+      - internal-3
+
+networks:
+  internet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.19.0.0/24
+  internal-1:
+    driver: bridge
+    internal: true
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.19.1.0/24
+  internal-2:
+    driver: bridge
+    internal: true
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.19.2.0/24
+  internal-3:
+    driver: bridge
+    internal: true
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.19.3.0/24
