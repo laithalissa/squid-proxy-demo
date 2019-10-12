@@ -23,7 +23,7 @@ print_result_line() {
 }
 
 print_header() {
-  printf '| '
+  printf '| Host '
   for client in "${clients[@]}"; do
     printf "| $client"
   done
