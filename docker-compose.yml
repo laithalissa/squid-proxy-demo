@@ -19,7 +19,7 @@ services:
       - http_proxy=squid:3128
       - HTTPS_PROXY=squid:3128
     volumes:
-      - ./etc/test-proxy.sh:/test-proxy.sh
+      - ./etc/connect.sh:/connect.sh
     networks:
       - internal-1
   tls-client:
@@ -29,7 +29,7 @@ services:
       - HTTPS_PROXY=squid:3128
     command: bash -c "while true; do sleep 30; done"
     volumes:
-      - ./etc/test-proxy.sh:/test-proxy.sh
+      - ./etc/connect.sh:/connect.sh
     networks:
       - internal-2
   blocked-client:
@@ -39,7 +39,7 @@ services:
       - HTTPS_PROXY=squid:3128
     command: bash -c "while true; do sleep 30; done"
     volumes:
-      - ./etc/test-proxy.sh:/test-proxy.sh
+      - ./etc/connect.sh:/connect.sh
     networks:
       - internal-3
 

@@ -64,7 +64,7 @@ for connection in "${connections[@]}"; do
 
   for client in "${clients[@]}"; do
     printf "$MAGENTA $client ...$RESET"
-    resp=$(docker-compose exec $client bash ./test-proxy.sh $connection)
+    resp=$(docker-compose exec $client bash ./connect.sh $connection)
     # docker-compose does something weird so filter out invisible chars
     resp=$(tr -dc '[[:print:]]' <<< "$resp")
 
