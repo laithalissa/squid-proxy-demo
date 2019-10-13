@@ -1,7 +1,9 @@
 | Host | http-client| tls-client| blocked-client|
 | --- | --- | --- | --- |
-| http://google.com | ✔: (301)| ✖ (403)| ✖ (403)|
-| https://google.com | ✖ (403)| ✔: (301)| ✖ (403)|
-| http://bing.com | ✖ (403)| ✖ (403)| ✖ (403)|
-| https://bing.com | ✖ (403)| ✖ (403)| ✖ (403)|
+| http://google.com | ✖ (000)| ✖ (000)| ✖ (000)|
+| https://google.com | ✖ (000)| ✖ (000)| ✖ (000)|
+| http://bing.com | ✖ (000)| ✖ (000)| ✖ (000)|
+| https://bing.com | ✖ (000)| ✖ (000)| ✖ (000)|
+| http://duckduckgo.com | ✖ (000)| ✖ (000)| ✖ (000)|
+| https://duckduckgo.com | ✖ (000)| ✖ (000)| ✖ (000)|
 
